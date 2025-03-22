@@ -11,11 +11,15 @@ Project by Group 3:
 
 ---
 
+## Overview
+
+In this project we have to make a Real-Time Text Autocompletion System using Python.
+
+---
+
 ## Mockups
 
-Currently, there are two mockups for the autocorrect application:
- 1. Autocorrect based on commandline arguments (i.e., using `argparse`)
- 2. Python's inbuilt `input()` function based
+Before we started working on this project, we made a couple of mockups so we could test out how we should approach the 
+project.
 
-> Mockups for the autocorrect app is currently under development. Once finished, their files will be properly linked to 
-> the README as well.
+> Mockups are still under development.
