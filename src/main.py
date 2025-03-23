@@ -25,6 +25,7 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
 
     node.is_end_of_word = True # last node that was inserted is deemed as the end of a word
 
+# THIS FUNCTION IS NOT A PART OF THIS PROJECT! THIS FUNCTION WAS IMPLEMENTED JUST FOR TESTING PURPOSES!
 def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm that helps search for the exact pattern
     # of words in a trie
     node = root
@@ -38,6 +39,9 @@ def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm t
         node = node.children[i]
 
     return node.is_end_of_word
+
+def loose_search(root: TrieNode, key: str) -> list[str]:
+    pass
 
 if __name__ == "__main__":
     root_node = TrieNode()
