@@ -1,3 +1,7 @@
+# Code by: Sidharth Suresh
+
+# This file is supposed to be run on its own but can also be renamed and used as a library is needed.
+
 class TrieNode: # Trie data structure definition starts here
     def __init__(self):
         self.children = [None] * 26 # multiplied by 26 because there are 26 characters in the english alphabet
@@ -21,6 +25,36 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
 
     node.is_end_of_word = True # last node that was inserted is deemed as the end of a word
 
-def loose_search(root: TrieNode, key: str) -> list[str]: # a search algorithm that helps search for similar patterns in
-                                                         # tries
-    pass # will be added soon
+def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm that helps search for the exact pattern
+    # of words in a trie
+    node = root
+
+    for char in key:
+        i = ord(char) - 97
+
+        if node.children[i] is None:
+            return False
+
+        node = node.children[i]
+
+    return node.is_end_of_word
+
+if __name__ == "__main__":
+    root_node = TrieNode()
+
+    while True:
+        ch = int(input("1.Insert\n2.Search\n\nEnter your choice here (1 or 2): "))
+        print()
+
+        if ch == 1:
+            value = input("Enter the word to add to the autocomplete: ")
+            insert(root_node, value)
+            print(f"\"{value}\" added to autocomplete data.")
+
+        elif ch == 2:
+            pass
+
+        else:
+            print(f"{ch} is not an option, please try 1 or 2")
+
+        print()
