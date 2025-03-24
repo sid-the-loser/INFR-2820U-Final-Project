@@ -40,8 +40,40 @@ def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm t
 
     return node.is_end_of_word
 
-def loose_search(root: TrieNode, key: str) -> list[str]:
-    pass
+def get_all_chars(root: TrieNode, root_index: int) -> list[str]:
+    strings = []
+
+    if root.is_end_of_word:
+        strings.append("")
+
+    for i in range(26):
+        pass # TODO: work from here
+
+    # adding the current root's char as a prefix
+    prefix = chr(root_index)
+    for i in range(len(strings)):
+        strings[i] = prefix + strings[i]
+
+    return strings
+
+def guess(root: TrieNode, key: str) -> list[str]:
+    guesses = []
+
+    if key.isalpha():
+        node = root
+
+        for char in key:
+            i = ord(char) - 97
+
+            if node.children[i] is None:
+                break
+
+            node = node.children[i]
+
+        else:
+            guesses = get_all_chars(node, i)
+
+    return guesses
 
 if __name__ == "__main__":
     root_node = TrieNode()
