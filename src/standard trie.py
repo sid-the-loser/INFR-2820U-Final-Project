@@ -1,7 +1,3 @@
-# Code by: Sidharth Suresh
-
-# This file is supposed to be run on its own but can also be renamed and used as a library is needed.
-
 class TrieNode: # Trie data structure definition starts here
     def __init__(self):
         self.children = [None] * 26 # multiplied by 26 because there are 26 characters in the english alphabet
@@ -24,21 +20,6 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
         node = node.children[i] # moves the pointer of the trie to the next pre-existing or newly created node
 
     node.is_end_of_word = True # last node that was inserted is deemed as the end of a word
-
-# # THIS FUNCTION IS NOT A PART OF THIS PROJECT! THIS FUNCTION WAS IMPLEMENTED JUST FOR TESTING PURPOSES!
-# def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm that helps search for the exact pattern
-#     # of words in a trie
-#     node = root
-#
-#     for char in key:
-#         i = ord(char) - 97
-#
-#         if node.children[i] is None:
-#             return False
-#
-#         node = node.children[i]
-#
-#     return node.is_end_of_word
 
 def autocomplete(root: TrieNode, key: str):
     node = root
