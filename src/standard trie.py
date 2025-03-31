@@ -25,55 +25,53 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
 
     node.is_end_of_word = True # last node that was inserted is deemed as the end of a word
 
-# THIS FUNCTION IS NOT A PART OF THIS PROJECT! THIS FUNCTION WAS IMPLEMENTED JUST FOR TESTING PURPOSES!
-def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm that helps search for the exact pattern
-    # of words in a trie
+# # THIS FUNCTION IS NOT A PART OF THIS PROJECT! THIS FUNCTION WAS IMPLEMENTED JUST FOR TESTING PURPOSES!
+# def search(root: TrieNode, key: str) -> bool: #list[str]: # a search algorithm that helps search for the exact pattern
+#     # of words in a trie
+#     node = root
+#
+#     for char in key:
+#         i = ord(char) - 97
+#
+#         if node.children[i] is None:
+#             return False
+#
+#         node = node.children[i]
+#
+#     return node.is_end_of_word
+
+def autocomplete(root: TrieNode, key: str):
     node = root
+
+    prefix = ""
 
     for char in key:
         i = ord(char) - 97
 
         if node.children[i] is None:
-            return False
+            print("No such word found in the treap!")
+            return
+
+        prefix += char
 
         node = node.children[i]
 
-    return node.is_end_of_word
+    if node.is_end_of_word:
+        print(prefix, end=", ")
 
-def get_all_chars(root: TrieNode, root_index: int) -> list[str]:
-    strings = []
+    print_all_branches(node, key)
 
+    print()
+
+def print_all_branches(root: TrieNode, prefix: str):
     if root.is_end_of_word:
-        strings.append("")
+        print(prefix, end=", ")
 
-    for i in range(26):
-        pass # TODO: work from here
+    children_len = len(root.children)
 
-    # adding the current root's char as a prefix
-    prefix = chr(root_index)
-    for i in range(len(strings)):
-        strings[i] = prefix + strings[i]
-
-    return strings
-
-def guess(root: TrieNode, key: str) -> list[str]:
-    guesses = []
-
-    if key.isalpha():
-        node = root
-
-        for char in key:
-            i = ord(char) - 97
-
-            if node.children[i] is None:
-                break
-
-            node = node.children[i]
-
-        else:
-            guesses = get_all_chars(node, i)
-
-    return guesses
+    for i in range(children_len):
+        if root.children[i] is not None:
+            print_all_branches(root.children[i], prefix+chr(i+97))
 
 if __name__ == "__main__":
     root_node = TrieNode()
@@ -88,7 +86,9 @@ if __name__ == "__main__":
             print(f"\"{value}\" added to autocomplete data.")
 
         elif ch == 2:
-            pass
+            value = input("Enter the word to autocomplete: ")
+            autocomplete(root_node, value)
+            # print(search(root_node, value))
 
         else:
             print(f"{ch} is not an option, please try 1 or 2")
