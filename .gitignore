@@ -1,4 +1,4 @@
-# (added) Rider cache directory (I don't really need it anywhere)
+# (added) PyCharm cache directory (I don't really need it anywhere)
 .idea/
 
 # (added) VSCode cache
