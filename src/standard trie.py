@@ -22,6 +22,13 @@ def insert(root: TrieNode, key: str) -> None:  # function that is used for inser
 
     node.is_end_of_word = True  # last node that was inserted is deemed as the end of a word
 
+def print_all_branches(root: TrieNode, prefix: str):  # printing all the children using the given prefix
+    if root.is_end_of_word:  # if the node is the end of a word, then print the prefix and ","
+        print(prefix, end=", ")
+
+    for i in range(26):  # traverses through all the children of the node and recurses this function if the node exists
+        if root.children[i] is not None:
+            print_all_branches(root.children[i], prefix + chr(i + 97))
 
 def autocomplete(root: TrieNode, key: str) -> None:  # function to check if the word even exists in the trie,
     # if it does exist then using that prefix/key provided, print
@@ -44,15 +51,6 @@ def autocomplete(root: TrieNode, key: str) -> None:  # function to check if the 
     # and prints them out
 
     print()  # new line because the other function doesn't provide any new line once it's done traversing
-
-
-def print_all_branches(root: TrieNode, prefix: str):  # printing all the children using the given prefix
-    if root.is_end_of_word:  # if the node is the end of a word, then print the prefix and ","
-        print(prefix, end=", ")
-
-    for i in range(26):  # traverses through all the children of the node and recurses this function if the node exists
-        if root.children[i] is not None:
-            print_all_branches(root.children[i], prefix + chr(i + 97))
 
 
 if __name__ == "__main__":  # if the program is being run as its own file (i.e., not as a library or module)
