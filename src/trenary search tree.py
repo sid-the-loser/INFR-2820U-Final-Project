@@ -27,7 +27,7 @@ def insert(root: Node, key: str):
     return root
 
 def search(root: Node, key: str) -> bool:
-	if not root:
+	if root is None:
 		return False
 		
 	if key[0] < root.char:
@@ -41,11 +41,11 @@ def search(root: Node, key: str) -> bool:
 			return search(root.middle, key[1:])
 			
 		else:
-			return root.isEndOfString
+			return root.is_end_of_word
 		
 
 def autocomplete(root: Node, key: str) -> None:
-    if not root:
+	if root is None:
 		return False
     
 
@@ -63,7 +63,7 @@ if __name__ == "__main__": # if the program is being run as its own file (i.e., 
  
         elif ch == 2:
             value = input("Enter the word to autocomplete: ")
-            search(root_node, value)
+            print(search(root_node, value))
  
         else:
             print(f"{ch} is not an option, please try 1 or 2")
