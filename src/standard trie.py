@@ -7,7 +7,7 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
     key = key.lower() # we only want the key we're inserting for to be in lowercase to avoid ASCII value issues
                       # eg: ord("A") => 65
                       #     ord("a") => 97
-                      #     where, `ord()` function returns the ASCII value of the character that's passed through it.
+                      #     where, `ord()` function returns the ASCII value of the character that's passed through it
 
     node = root # this variable keeps track of the current node
 
@@ -21,40 +21,37 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
 
     node.is_end_of_word = True # last node that was inserted is deemed as the end of a word
 
-def autocomplete(root: TrieNode, key: str):
-    node = root
+def autocomplete(root: TrieNode, key: str): # function to check if the word even exists in the trie, if it does
+											# exist then using that prefix/key provided, print out the rest of 
+											# the branches.
+	node = root # this variable keeps track of the current node
 
-    prefix = ""
+	for char in key: # iterated through the string in key
+		i = ord(char) - 97
 
-    for char in key:
-        i = ord(char) - 97
+		if node.children[i] is None: # checks if that child node doesn't exist (i.e., is it null)
+			print("No such word found in the treap!") # prints out an error message and stops the function
+			return
 
-        if node.children[i] is None:
-            print("No such word found in the treap!")
-            return
+		node = node.children[i] # moves the pointer of the trie to the next pre-existing or newly created node
 
-        prefix += char
+	if node.is_end_of_word: # is the node the end of the word then print a "," at the end
+		print(key, end=", ")
 
-        node = node.children[i]
+	print_all_branches(node, key) # the function that traverses through all the given nodes children
+								  # and prints them out
 
-    if node.is_end_of_word:
+	print() # new line because the other function doesn't provide any new line once it's done traversing
+
+def print_all_branches(root: TrieNode, prefix: str): # printing all the children using the given prefix
+    if root.is_end_of_word: # if the node is the end of a word, then print the prefix and ","
         print(prefix, end=", ")
 
-    print_all_branches(node, key)
-
-    print()
-
-def print_all_branches(root: TrieNode, prefix: str):
-    if root.is_end_of_word:
-        print(prefix, end=", ")
-
-    children_len = len(root.children)
-
-    for i in range(children_len):
+    for i in range(26): # traverses through all the children of the node and recurses this function if the node exists
         if root.children[i] is not None:
             print_all_branches(root.children[i], prefix+chr(i+97))
 
-if __name__ == "__main__":
+if __name__ == "__main__": # if the program is being run as its own file (i.e., not as a library or module)
     root_node = TrieNode()
 
     while True:
@@ -68,8 +65,7 @@ if __name__ == "__main__":
 
         elif ch == 2:
             value = input("Enter the word to autocomplete: ")
-            autocomplete(root_node, value)
-            # print(search(root_node, value))
+            autocomplete(root_node, value) 
 
         else:
             print(f"{ch} is not an option, please try 1 or 2")
