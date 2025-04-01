@@ -21,9 +21,9 @@ def insert(root: TrieNode, key: str) -> None: # function that is used for insert
 
     node.is_end_of_word = True # last node that was inserted is deemed as the end of a word
 
-def autocomplete(root: TrieNode, key: str): # function to check if the word even exists in the trie, if it does
-											# exist then using that prefix/key provided, print out the rest of 
-											# the branches.
+def autocomplete(root: TrieNode, key: str) -> None: # function to check if the word even exists in the trie, 
+													# if it does exist then using that prefix/key provided, print
+													# out the rest of the branches.
 	node = root # this variable keeps track of the current node
 
 	for char in key: # iterated through the string in key
