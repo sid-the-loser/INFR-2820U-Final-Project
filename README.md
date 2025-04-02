@@ -16,10 +16,3 @@ Project by Group 3:
 In this project we have to make a Real-Time Text Autocompletion System using Python.
 
 ---
-
-## Mockups
-
-Before we started working on this project, we made a couple of mockups so we could test out how we should approach the 
-project.
-
-> Mockups are still under development.
